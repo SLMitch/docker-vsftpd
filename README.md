@@ -18,6 +18,8 @@ A single upload user can be specified via the FTPUSER_xxx variables. It is activ
 
 An example compose file is provided here in docker-compose.yml. This is for the common scenario of sharing from Docker swarm the contents of a network-attached volume as a read-only anonymous-ftp service.
 
+Status: DO NOT USE. I've had constant segfault crashes with vsftpd version 3.0.3 under Alpine and Ubuntu. I've switched to proftpd (see that image).
+
 ### Variables
 
 Variable | Default | Description |
