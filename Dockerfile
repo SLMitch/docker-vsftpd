@@ -1,12 +1,5 @@
 FROM alpine:3.7
 LABEL Michel Desconnets "michel.desconnets@gmail.com"
-ARG BUILD_DATE
-ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.license=Apache-2.0 \
-    org.label-schema.name=vsftpd \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url=https://github.com/instantlinux/docker-tools
 
 ENV ANONYMOUS_ENABLE=YES \
     ANON_MKDIR_WRITE_ENABLE=NO \
