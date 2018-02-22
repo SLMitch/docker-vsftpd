@@ -8,7 +8,7 @@ fi
 
 
   adduser -u $FTPUSER_UID -s /bin/sh -g "ftp user" -D $FTPUSER_NAME
-  echo "$FTPUSER_NAME:$FTPUSER_PASSWORD" | chpasswd -e
+  echo "$FTPUSER_NAME:$FTPUSER_PASSWORD" | chpasswd 
 
 
 # There is a vexing problem with permissions of /dev/stdout under
