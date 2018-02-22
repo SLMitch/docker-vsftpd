@@ -6,16 +6,15 @@ if [ ! -f /etc/timezone ] && [ ! -z "$TZ" ]; then
   echo $TZ >/etc/timezone
 fi
 
-if [ -e /run/secrets/$FTPUSER_PASSWORD_SECRET ]; then
+
   adduser -u $FTPUSER_UID -s /bin/sh -g "ftp user" -D $FTPUSER_NAME
-  echo "$FTPUSER_NAME:$(cat /run/secrets/$FTPUSER_PASSWORD_SECRET)" \
-    | chpasswd -e
-fi
+  echo "$FTPUSER_NAME:$FTPUSER_PASSWORD" | chpasswd -e
+
 
 # There is a vexing problem with permissions of /dev/stdout under
 # Docker, gave up trying to fix symlink issues. Here's the workaround.
 
-if [ "$VSFTPD_LOG_FILE" == /dev/stdout ]; then
+if [ "$VSFTPD_LOG_FILE" = /dev/stdout ]; then
   VSFTPD_LOG_FILE=/var/log/stdout.txt
   touch $VSFTPD_LOG_FILE
   tail -f -n 0 $VSFTPD_LOG_FILE &

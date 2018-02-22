@@ -1,5 +1,5 @@
 FROM alpine:3.7
-MAINTAINER Rich Braun "docker@instantlinux.net"
+LABEL Michel Desconnets "michel.desconnets@gmail.com"
 ARG BUILD_DATE
 ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
@@ -11,7 +11,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 ENV ANONYMOUS_ENABLE=YES \
     ANON_MKDIR_WRITE_ENABLE=NO \
     ANON_UPLOAD_ENABLE=NO \
-    FTPUSER_PASSWORD_SECRET=ftp-user-password-secret \
+    FTPUSER_PASSWORD=ftppassword \
     FTPUSER_NAME=ftpuser \
     FTPUSER_UID=1001 \
     LOCAL_UMASK=022 \
@@ -19,7 +19,7 @@ ENV ANONYMOUS_ENABLE=YES \
     PASV_ADDRESS= \
     PASV_MAX_PORT=30100 \
     PASV_MIN_PORT=30091 \
-    TZ=UTC \
+    TZ=Europe/Paris \
     USE_LOCALTIME=YES \
     VSFTPD_LOG_FILE=/dev/stdout \
     WRITE_ENABLE=YES
@@ -27,7 +27,6 @@ ENV ANONYMOUS_ENABLE=YES \
 RUN apk add --update --no-cache tzdata vsftpd && \
     passwd -l root
 
-VOLUME /etc/vsftpd.d /var/lib/ftp
 EXPOSE 21 $PASV_MIN_PORT-$PASV_MAX_PORT
 
 COPY entrypoint.sh /usr/local/bin/
